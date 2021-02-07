@@ -2,41 +2,51 @@ import React, { useState } from "react";
 import "./Form.css";
 
 function Form() {
+
+  // owner object local state
   const [owner, setOwner] = useState({
     owner: "",
     description: "",
   });
+
+  // handle owner change
   const handleOwnerChange = (e) => {
-    const updatedOwner = {...owner};
-    updatedOwner[e.target.name] = e.target.value;
-    setOwner(updatedOwner);
+    const updatedOwner = {...owner}; // spread cloned object
+    updatedOwner[e.target.name] = e.target.value; // update value
+    setOwner(updatedOwner); // set owner state
   };
 
-  const blankCat = { name: "", age: "" };
-  const [cats, setCats] = useState([{ ...blankCat }]);
+  const blankCat = { name: "", age: "" }; // blank cat object
+  const [cats, setCats] = useState([{ ...blankCat }]); // cat array local state
 
+  // add cat input function
   const addCat = () => {
-    setCats([...cats, { ...blankCat }]);
+    setCats([...cats, { ...blankCat }]); // spread cat state, add blank cat
   };
 
+  // remove cat input function
   const removeCat = (i) => {
-    let updatedCats = [...cats];
-    updatedCats.splice(i, 1);
-    setCats(updatedCats);
-  }
+    let updatedCats = [...cats]; // spread cloned array
+    updatedCats.splice(i, 1); // splice 1 cat object on index
+    setCats(updatedCats); // set cat state
+  };
 
+  // handle change for cat inputs
   const handleCatChange = (e) => {
     const updatedCats = [...cats];
+    // dataset id for index classname for key value for value
     updatedCats[e.target.dataset.id][e.target.className] = e.target.value;
-    setCats(updatedCats);
+    setCats(updatedCats); // set cat state
   };
 
+  // reload prevention and submission logs
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(owner)
-    console.log(cats)
+    console.log(owner);
+    console.log(cats);
   };
 
+  // return for dynamic form
   return (
     <div>
       <form onSubmit={handleSubmit}>
