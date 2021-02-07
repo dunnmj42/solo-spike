@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./Form.css";
 
 function Form() {
-
   // owner object local state
   const [owner, setOwner] = useState({
     owner: "",
@@ -11,7 +10,7 @@ function Form() {
 
   // handle owner change
   const handleOwnerChange = (e) => {
-    const updatedOwner = {...owner}; // spread cloned object
+    const updatedOwner = { ...owner }; // spread cloned object
     updatedOwner[e.target.name] = e.target.value; // update value
     setOwner(updatedOwner); // set owner state
   };
@@ -34,8 +33,8 @@ function Form() {
   // handle change for cat inputs
   const handleCatChange = (e) => {
     const updatedCats = [...cats];
-    // dataset id for index classname for key value for value
-    updatedCats[e.target.dataset.id][e.target.className] = e.target.value;
+    // dataset i for index, classname for key, value for value
+    updatedCats[e.target.dataset.i][e.target.className] = e.target.value;
     setCats(updatedCats); // set cat state
   };
 
@@ -68,7 +67,7 @@ function Form() {
         />
         <br />
         <button onClick={addCat}>Add New Cat</button>
-        {cats.map((val, i) => {
+        {cats.map((cat, i) => {
           const catId = `cat-${i}`;
           const ageId = `age-${i}`;
           return (
@@ -77,7 +76,7 @@ function Form() {
               <input
                 type="text"
                 name={catId}
-                data-id={i}
+                data-i={i}
                 id={catId}
                 className="name"
                 value={cats[i].name}
@@ -87,7 +86,7 @@ function Form() {
               <input
                 type="text"
                 name={ageId}
-                data-id={i}
+                data-i={i}
                 id={ageId}
                 className="age"
                 value={cats[i].age}
