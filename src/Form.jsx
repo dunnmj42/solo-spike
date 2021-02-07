@@ -6,11 +6,11 @@ function Form() {
     owner: "",
     description: "",
   });
-  const handleOwnerChange = (e) =>
-    setOwner({
-      ...owner,
-      [e.target.name]: [e.target.value],
-    });
+  const handleOwnerChange = (e) => {
+    const updatedOwner = {...owner};
+    updatedOwner[e.target.name] = e.target.value;
+    setOwner(updatedOwner);
+  };
 
   const blankCat = { name: "", age: "" };
   const [cats, setCats] = useState([{ ...blankCat }]);
@@ -19,8 +19,16 @@ function Form() {
     setCats([...cats, { ...blankCat }]);
   };
 
+  const handleCatChange = (e) => {
+    const updatedCats = [...cats];
+    updatedCats[e.target.dataset.id][e.target.className] = e.target.value;
+    setCats(updatedCats);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(owner)
+    console.log(cats)
   };
 
   return (
@@ -56,6 +64,8 @@ function Form() {
                 data-id={i}
                 id={catId}
                 className="name"
+                value={cats[i].name}
+                onChange={handleCatChange}
               />
               <label htmlFor={ageId}>Age</label>
               <input
@@ -64,6 +74,8 @@ function Form() {
                 data-id={i}
                 id={ageId}
                 className="age"
+                value={cats[i].age}
+                onChange={handleCatChange}
               />
             </div>
           );
