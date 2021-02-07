@@ -19,6 +19,12 @@ function Form() {
     setCats([...cats, { ...blankCat }]);
   };
 
+  const removeCat = (i) => {
+    let updatedCats = [...cats];
+    updatedCats.splice(i, 1);
+    setCats(updatedCats);
+  }
+
   const handleCatChange = (e) => {
     const updatedCats = [...cats];
     updatedCats[e.target.dataset.id][e.target.className] = e.target.value;
@@ -57,7 +63,7 @@ function Form() {
           const ageId = `age-${i}`;
           return (
             <div key={i}>
-              <label htmlFor={catId}>{`Cat #${i + 1}`}</label>
+              <label htmlFor={catId}>Cat</label>
               <input
                 type="text"
                 name={catId}
@@ -77,6 +83,7 @@ function Form() {
                 value={cats[i].age}
                 onChange={handleCatChange}
               />
+              <button onClick={() => removeCat(i)}>Remove</button>
             </div>
           );
         })}
